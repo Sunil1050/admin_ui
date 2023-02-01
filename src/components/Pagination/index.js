@@ -1,13 +1,12 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import ReactPaginate from 'react-paginate';
-import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
-import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
+import { AiOutlineArrowLeft, AiOutlineArrowRight } from "react-icons/ai"
 import { deleteSelectedUsers, selectAllUsers } from "../../redux/users/userSlice"
 import Users from '../Users';
 import './index.css';
 
-function Pagination({ itemsPerPage, users, filteredUsers, deleteSingleUser, selectedUser, editedUser}) {
+function Pagination({ itemsPerPage, users, filteredUsers, deleteSingleUser, selectedUser, editedUser }) {
     const [isChecked, setIsChecked] = useState(false);
     const dispatch = useDispatch();
     const [itemOffset, setItemOffset] = useState(0);
@@ -80,13 +79,13 @@ function Pagination({ itemsPerPage, users, filteredUsers, deleteSingleUser, sele
                         disabledClassName={'disabled-page'}
                         marginPagesDisplayed={2}
                         nextClassName={"item next "}
-                        nextLabel={<ArrowForwardIosIcon style={{ fontSize: 18, width: 150, color: '#fff'}} />}
+                        nextLabel={<AiOutlineArrowRight style={{ fontSize: 18, width: 150, color: '#fff' }} />}
                         onPageChange={handlePageClick}
                         pageCount={pageCount}
                         pageClassName={'item pagination-page '}
                         pageRangeDisplayed={2}
                         previousClassName={"item previous"}
-                        previousLabel={<ArrowBackIosIcon style={{ fontSize: 18, width: 150, color: '#fff'}} />}
+                        previousLabel={<AiOutlineArrowLeft style={{ fontSize: 18, width: 150, color: '#fff' }} />}
                     />
                 </div>
             )}
