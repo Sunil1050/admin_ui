@@ -1,10 +1,8 @@
-import React, { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React, { useState, useEffect} from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { FiEdit } from 'react-icons/fi'
 import { MdDelete } from 'react-icons/md'
-import { getAllUsers } from "../../redux/users/userSlice"
 
 const UserCard = ({ eachUser, deleteSingleUser, selectedUser, editedUser }) => {
     const { id, name, email, role, isChecked } = eachUser;
@@ -12,9 +10,26 @@ const UserCard = ({ eachUser, deleteSingleUser, selectedUser, editedUser }) => {
     const [userEmail, setUserEmail] = useState(email)
     const [userRole, setUserRole] = useState(role);
     const [show, setShow] = useState(false);
-    const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
-    
+
+    useEffect(() => {
+        setUserName(name);
+        setUserEmail(email);
+        setUserRole(role);
+    }, [eachUser]);
+
+    const handleClose = () => {
+        setShow(false);
+    }
+    const handleShow = () => {
+        setShow(true);
+    }
+
+    const onEdit = () => {
+        console.log('Each user: ', eachUser)
+        console.log('Each user state: ', { userName, userEmail, userRole })
+        handleShow()
+    }
+
     const onDelete = () => {
         // console.log('User id: ', userDetails.id)
         deleteSingleUser(id);
@@ -40,7 +55,6 @@ const UserCard = ({ eachUser, deleteSingleUser, selectedUser, editedUser }) => {
 
     const onSave = () => {
         editedUser(id, userName, userEmail, userRole)
-        // setUserDetails({ ...userDetails, name: userName, email: userEmail, role: userRole })
         handleClose()
     }
 
@@ -74,7 +88,7 @@ const UserCard = ({ eachUser, deleteSingleUser, selectedUser, editedUser }) => {
             <td>{role}</td>
             <td>
                 <>
-                    <button type="button" className="action-button" onClick={handleShow}>
+                    <button type="button" className="action-button" onClick={onEdit}>
                         <FiEdit className="action-icon" />
                     </button>
                     <Modal show={show} onHide={handleClose}>

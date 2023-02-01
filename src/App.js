@@ -39,15 +39,15 @@ const App = () => {
     dispatch(selectUser(selectedUsersList))
   }
 
-  const editedUser = (userId, name, email, role) => {
-    const updatedUsers = users.map(item => {
-      if (item.id === userId) {
-        return {...item, name, email, role}
-      }
-      return item;
-    })
-    dispatch(editUser(updatedUsers))
-  }
+  // const editedUser = (userId, name, email, role) => {
+  //   const updatedUsers = users.map(item => {
+  //     if (item.id === userId) {
+  //       return {...item, name, email, role}
+  //     }
+  //     return item;
+  //   })
+  //   dispatch(editUser(updatedUsers))
+  // }
 
   const filteredUsers = users.filter(item => {
     return item.name.toLowerCase().includes(input.toLowerCase()) || item.email.toLowerCase().includes(input.toLowerCase()) || item.role.toLowerCase().includes(input.toLowerCase())
@@ -61,7 +61,7 @@ const App = () => {
         <input type="search" placeholder="Enter something to search" className="form-control search-input" onChange={handleInput} value={input} />
         <h6>Search by name,role and email</h6>
       </div>
-      <Pagination users={filteredUsers} itemsPerPage={10} filteredUsers={filteredUsers} deleteSingleUser={deleteSingleUser} selectedUser={selectedUser} editedUser={editedUser} />
+      <Pagination users={filteredUsers} itemsPerPage={10} filteredUsers={filteredUsers} deleteSingleUser={deleteSingleUser} selectedUser={selectedUser} />
     </div>
   )
 }

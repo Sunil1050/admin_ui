@@ -2,11 +2,11 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import ReactPaginate from 'react-paginate';
 import { AiOutlineArrowLeft, AiOutlineArrowRight } from "react-icons/ai"
-import { deleteSelectedUsers, selectAllUsers } from "../../redux/users/userSlice"
+import { deleteSelectedUsers, selectAllUsers, editUser } from "../../redux/users/userSlice"
 import Users from '../Users';
 import './index.css';
 
-function Pagination({ itemsPerPage, users, filteredUsers, deleteSingleUser, selectedUser, editedUser }) {
+function Pagination({ itemsPerPage, users, filteredUsers, deleteSingleUser, selectedUser }) {
     const [isChecked, setIsChecked] = useState(false);
     const dispatch = useDispatch();
     const [itemOffset, setItemOffset] = useState(0);
@@ -41,6 +41,16 @@ function Pagination({ itemsPerPage, users, filteredUsers, deleteSingleUser, sele
 
         dispatch(selectAllUsers(updatedUsers))
         setIsChecked(event.target.checked);
+    }
+
+    const editedUser = (userId, name, email, role) => {
+        const updatedUsers = users.map(item => {
+            if (item.id === userId) {
+                return { ...item, name, email, role }
+            }
+            return item;
+        })
+        dispatch(editUser(updatedUsers))
     }
 
     return (
