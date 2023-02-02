@@ -1,54 +1,39 @@
-const PaginationStyles = {
-    pagination: {
-      display: "flex",
-      justifyContent: "center",
-      alignItems: "center",
-      marginTop: "1em"
-    },
-    button: {
-      margin: "0 1em",
-      padding: ".5em 1em",
-      border: "1px solid gray",
-      borderRadius: "5px",
-      backgroundColor: "white",
-      outline: "none"
-    },
-    activeButton: {
-      backgroundColor: "lightgray"
-    }
-  };
-  
-  const Pagination = ({ perPage, total, currentPage, onPageChange }) => {
-    const pageCount = Math.ceil(total / perPage);
-    const pages = Array.from({ length: pageCount }, (_, index) => index + 1);
-  
-    return (
-      <div style={PaginationStyles.pagination}>
+import { GrLinkNext } from "react-icons/gr"
+import { GrLinkPrevious } from "react-icons/gr"
+import './index.css';
+
+const Pagination = ({ perPage, total, currentPage, onPageChange }) => {
+  const pageCount = Math.ceil(total / perPage);
+  const pages = Array.from({ length: pageCount }, (_, index) => index + 1);
+
+  return (
+    <div className="pagination">
+      {currentPage > 1 && (
         <button
-          style={{ ...PaginationStyles.button, ...(currentPage === 1 ? { display: "none" } : {}) }}
+          className="button"
           onClick={() => onPageChange(currentPage - 1)}
         >
-          Previous
+          <GrLinkPrevious />
         </button>
-        {pages.map(page => (
-          <button
-            key={page}
-            style={{
-              ...PaginationStyles.button,
-              ...(currentPage === page ? PaginationStyles.activeButton : {})
-            }}
-            onClick={() => onPageChange(page)}
-          >
-            {page}
-          </button>
-        ))}
+      )}
+      {pages.map(page => (
         <button
-          style={{ ...PaginationStyles.button, ...(currentPage === pageCount ? { display: "none" } : {}) }}
+          key={page}
+          className={`button ${currentPage === page && "active-button"}`}
+          onClick={() => onPageChange(page)}
+        >
+          {page}
+        </button>
+      ))}
+      {currentPage < pageCount && (
+        <button
+          className="button"
           onClick={() => onPageChange(currentPage + 1)}
         >
-          Next
+          <GrLinkNext />
         </button>
-      </div>
-    );
-  };
-export default Pagination;  
+      )}
+    </div>
+  );
+};
+export default Pagination;

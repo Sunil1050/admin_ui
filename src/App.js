@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Pagination from "./components/Pagination";
 import Users from "./components/Users";
-import { fetchAsyncUsers, deleteSelectedUsers, selectAllUsers, editUser, deleteUser, selectUser, searchUsers, changePage} from "./redux/users/userSlice";
+import { fetchAsyncUsers, deleteSelectedUsers, selectAllUsers, editUser, deleteUser, selectUser, searchUsers, changePage } from "./redux/users/userSlice";
 import './App.css';
 
 
@@ -83,10 +83,10 @@ const App = () => {
       <h1 className="text-center">Admin UI</h1>
       <div>
         <h6>Search Filter</h6>
-        <input type="search" placeholder="Enter something to search" className="form-control search-input" onChange={handleChange} value={searchStr} />
+        <input type="search" placeholder="Enter something" className="form-control search-input" onChange={handleChange} value={searchStr} />
         <h6>Search by name,role and email</h6>
       </div>
-      <div className="mt-5">
+      <div className="mt-3">
         <table class="table">
           <thead class="table-primary">
             <tr>
@@ -108,8 +108,8 @@ const App = () => {
         </div>
       </div>
       {users.length > 0 && (
-        <div className='d-flex flex-row justify-content-around'>
-          <button type="button" className="delete-selected align-self-end" onClick={onDeleteSelectedUsers}>Delete Selected</button>
+        <div className='d-flex flex-row justify-content-around flex-wrap'>
+          <button type="button" className="delete-selected" onClick={onDeleteSelectedUsers}>Delete Selected</button>
           <Pagination
             perPage={perPage}
             total={filteredUsers.length}
@@ -120,5 +120,6 @@ const App = () => {
       )}
     </div>
   )
+
 }
 export default App;
