@@ -4,6 +4,8 @@ import './index.css';
 
 const Pagination = ({ perPage, total, currentPage, onPageChange }) => {
   const pageCount = Math.ceil(total / perPage);
+
+  // The line creates an array of numbers from 1 to pageCount.
   const pages = Array.from({ length: pageCount }, (_, index) => index + 1);
 
   return (

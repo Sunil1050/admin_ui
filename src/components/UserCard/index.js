@@ -17,28 +17,29 @@ const UserCard = ({ eachUser, deleteSingleUser, selectedUser, editedUser }) => {
         setUserRole(role);
     }, [eachUser]);
 
+    //This function is used to close the modal
     const handleClose = () => {
         setShow(false);
     }
+
+    //This function is used to show the modal
     const handleShow = () => {
         setShow(true);
     }
 
-    const onEdit = () => {
-        console.log('Each user: ', eachUser)
-        console.log('Each user state: ', { userName, userEmail, userRole })
-        handleShow()
-    }
-
+    //This method is used to delete a single user from list
     const onDelete = () => {
         deleteSingleUser(id);
     }
 
+    //This method is used to change the checkin Status of user.
     const onClickCheckbox = (event) => {
         const userId = event.target.id;
         const userStatus = event.target.checked;
         selectedUser(userId, userStatus)
     }
+
+    //The below three onChange events used to handle name, email and role for three input fields in modal.
 
     const onChangeName = (event) => {
         setUserName(event.target.value)
@@ -52,11 +53,13 @@ const UserCard = ({ eachUser, deleteSingleUser, selectedUser, editedUser }) => {
         setUserRole(event.target.value)
     }
 
+    //This method prompts to edit the user and close the modal
     const onSave = () => {
         editedUser(id, userName, userEmail, userRole)
         handleClose()
     }
 
+    //This is simple method which return form JSX used in modal
     const renderForm = () => {
         return (
             <form>
@@ -77,6 +80,7 @@ const UserCard = ({ eachUser, deleteSingleUser, selectedUser, editedUser }) => {
         )
 
     }
+    
     return (
         <tr className={`${isChecked && "table-success"}`}>
             <th scope="row">
@@ -87,7 +91,7 @@ const UserCard = ({ eachUser, deleteSingleUser, selectedUser, editedUser }) => {
             <td>{role}</td>
             <td>
                 <>
-                    <button type="button" className="action-button" onClick={onEdit}>
+                    <button type="button" className="action-button" onClick={handleShow}>
                         <FiEdit className="action-icon" />
                     </button>
                     <Modal show={show} onHide={handleClose}>
