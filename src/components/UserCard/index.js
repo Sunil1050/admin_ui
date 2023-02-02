@@ -1,4 +1,4 @@
-import React, { useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { FiEdit } from 'react-icons/fi'
@@ -31,7 +31,6 @@ const UserCard = ({ eachUser, deleteSingleUser, selectedUser, editedUser }) => {
     }
 
     const onDelete = () => {
-        // console.log('User id: ', userDetails.id)
         deleteSingleUser(id);
     }
 
@@ -79,7 +78,7 @@ const UserCard = ({ eachUser, deleteSingleUser, selectedUser, editedUser }) => {
 
     }
     return (
-        <tr>
+        <tr className={`${isChecked && "table-success"}`}>
             <th scope="row">
                 <input type="checkbox" className="checkbox" id={id} onChange={onClickCheckbox} checked={isChecked} />
             </th>
